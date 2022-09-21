@@ -1,4 +1,5 @@
 import java.util.*;
+/*practice of loops */
 public class Combination {
     public static void main(String[] args){
         int result=1;
@@ -12,5 +13,14 @@ public class Combination {
 
         System.out.println ("C("+n+", "+r+") = "+result);
         kb.close();
+        
+        // compound interest
+        double p=100, goal=200, ar=.10;
+        int y=0;
+        while (p < goal) {
+            p=p*(1+ar);
+            y++;
+        }
+        System.out.println(y);
     }
 }
