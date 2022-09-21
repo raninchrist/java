@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 public class BigSmallGame {
     static public void main (String[] args) {
@@ -26,6 +26,8 @@ public class BigSmallGame {
                 System.out.println ("You lost!");
             }
             System.out.println("You have $" + my + " and the host has $" + pc);
+            
         }
+        kb.close();
     }
 }
