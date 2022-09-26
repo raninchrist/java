@@ -2,7 +2,7 @@ package unit1;
 public class PrintShapes {
     public static void main (String[] args) {
 
-        printParallelogram('#', 5, 7);
+        printParallelogram('@', 5, 7);
         //printTriangle ('@', 5, 9);
     }
     /*
@@ -13,15 +13,19 @@ public class PrintShapes {
             // print some spaces
             printSpaces(height - i);
             // print some #
-            for (int j = 0; j < length; j++) {
-                System.out.print(ch);
-            }
-            System.out.println();
+            printLine (ch, length);
         }
     }
     public static void printSpaces (int n) {
         for (int a = 0; a < n; a++) {
             System.out.print(" ");
         }
+    }
+    public static void printLine(char ch, int n) {
+        for (int j = 0; j < n; j++) {
+            System.out.print(ch);
+        }
+        System.out.println();
+
     }
 }
