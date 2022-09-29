@@ -1,3 +1,4 @@
+package unit1;
 import java.util.*;
 /*practice of loops */
 public class Combination {
