@@ -1,3 +1,4 @@
+package unit1;
 import java.util.Scanner;
 
 public class MathHelper {
@@ -39,6 +40,7 @@ public class MathHelper {
                 System.out.println ("You are wrong.");
             }
         }
+        kb.close();
         System.out.println ("Good job. Your score is " + right * 100 /numProb + "%");
     }
 

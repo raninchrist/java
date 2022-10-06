@@ -7,5 +7,7 @@ public class TicTacToe {
                 System.out.print (" | "+board.charAt(r*3+c));
             System.out.println(" | ");
         }
+        int i = 1_2; //this is 12
+        System.out.println(i*3);
     }
 }
