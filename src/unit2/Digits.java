@@ -11,8 +11,13 @@ public class Digits {
     }
 
     public void printDigitsReverse() {
-        Digits reverse = new Digits(reverse ());
-        reverse.printDigits();
+        // Digits reverse = new Digits(reverse ());
+        // reverse.printDigits();
+        if (num > 9) {
+            Digits n = new Digits (num / 10);
+            n.printDigitsReverse();
+        }
+        System.out.println (num % 10);
     }
 
     public Digits (int n) {
