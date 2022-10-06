@@ -11,7 +11,17 @@ public class RomanEncryption {
         String secret = encrypt(msg, 5);
         System.out.println(secret);
         kb.close();
-        System.out.println((-1) % 20);
+        System.out.println(parseInt("A07", 16));
+    }
+    public static int parseInt(String s, int b) {
+        int r = 0, n = 0;
+        for (int i = s.length()-1; i>=0; i--) {
+            char ch = s.charAt(i);
+            int d = ch - '0' > 9 ? ch - 'A' + 10 : ch - '0';
+            r += d * (int) Math.pow(b, n);
+            n++;
+        }
+        return r;
     }
 
     public static String encrypt(String msg, int shift) {

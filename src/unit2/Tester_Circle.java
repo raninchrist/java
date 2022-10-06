@@ -8,5 +8,7 @@ public class Tester_Circle {
         Circle c2 = new Circle(5.5);
         //c2.setRadius(5.5);
         System.out.println(c2.circumference());
+        System.out.println (Circle.numofCookies);
+        Circle.areaFormula();
     }
 }
