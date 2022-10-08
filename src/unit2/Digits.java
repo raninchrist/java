@@ -24,6 +24,11 @@ public class Digits {
         num = n;
     }
     
+    public int reverseRecur () {
+        if (num < 10) return num;
+        Digits num_1 = new Digits(num/10);
+        return Integer.parseInt(""+ num % 10 + num_1.reverseRecur());
+    }
     private int reverse () {
         int n = num, r = 0;
         while ( n > 0) {
@@ -38,5 +43,6 @@ public class Digits {
         Digits d = new Digits (1234);
         d.printDigits();
         d.printDigitsReverse();
+        System.out.println (d.reverseRecur());
     }
 }
