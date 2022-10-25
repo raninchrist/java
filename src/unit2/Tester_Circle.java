@@ -5,10 +5,12 @@ public class Tester_Circle {
         System.out.println (c1.circumference());
         c1.setRadius(10.5);
         System.out.println (c1.circumference());
-        Circle c2 = new Circle(5.5);
+        Circle c2 = new Circle(10.5);
         //c2.setRadius(5.5);
         System.out.format("The circumference is %10.2f\n", c2.circumference());
         System.out.format ("%02d\n", Circle.numofCookies);
         Circle.areaFormula();
+        c2 = c1;
+        System.out.println (c1.equals(c2));
     }
 }

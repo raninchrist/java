@@ -4,5 +4,6 @@ public class FormatExamples {
     public static void main (String[] args) {
         double foo = (double)8/3;
         System.out.format ("This is %10.2f %10d %10s\n", foo, 4, "good");
+        //This is       2.67          4       good
     }
 }
