@@ -23,5 +23,5 @@ public class Burger {
     public String getName() {
         return name;
     }
-
+    
 }
