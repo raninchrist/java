@@ -12,10 +12,19 @@ public class BasicArrays {
             sum += ia[i];
         }
         System.out.format ("Avg = %.1f\n", (double) sum/ia.length);
-        String[] sa = {"ab", "sdfs", "weiuhrf", "wiuehd", "sdowe8ru"};
-        for (int i = 0; i < sa.length; i ++) {
-            int l = sa[i].length();
-            System.out.println(sa[i] + " has " + l + " letters");
+
+        // bubble the smallest
+        String[] sa = {"dow", "ab", "zyx", "sdfs", "weiuhrf", "wiuehd", "sdowe8ru"};
+        for (int i = sa.length - 1; i >= 1 ; i --) {
+            if (sa[i].compareTo(sa[i-1]) < 0) {
+                String temp = sa[i];
+                sa[i] = sa[i-1];
+                sa[i-1] = temp;
+            }
         }
+        for (String s : sa) {
+            System.out.println(s);
+        }
+
     }
 }
