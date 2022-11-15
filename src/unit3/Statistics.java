@@ -24,6 +24,14 @@ public class Statistics {
         return max;
     }
     
+    public int getMean () {
+        int sum = 0;
+        for (int i = 0; i < data.length; i++) {
+            sum += data[i];
+        }
+        return sum/data.length;
+    }
+ 
     public int[] distribution() {
         return counter;
     }
@@ -40,4 +48,9 @@ public class Statistics {
         }
     }
 
+    public static void main (String[] args) {
+        Statistics myStat = new Statistics(1000);
+        myStat.printDistribution();
+        System.out.println(myStat.getMean());
+    }
 }
