@@ -1,30 +1,37 @@
 package unit3;
 
+import java.util.Arrays;
+
 public class BasicArrays {
     public static void main (String[] args) {
-        int[] ia = new int[21];
+        int[] ia = new int[1000];
         for (int i = 0; i < ia.length; i ++ ) {
-            ia[i] = (int) (Math.random() * 99 + 1);
-            System.out.println(ia[i]);
+            ia[i] = (int) (Math.random() * 999 + 1);
         }
-        int sum = 0;
-        for (int i = ia.length - 1; i >= 0; i--) {
-            sum += ia[i];
-        }
-        System.out.format ("Avg = %.1f\n", (double) sum/ia.length);
 
-        // bubble the smallest
-        String[] sa = {"dow", "ab", "zyx", "sdfs", "weiuhrf", "wiuehd", "sdowe8ru"};
-        for (int i = sa.length - 1; i >= 1 ; i --) {
-            if (sa[i].compareTo(sa[i-1]) < 0) {
-                String temp = sa[i];
-                sa[i] = sa[i-1];
-                sa[i-1] = temp;
+        Arrays.sort(ia);
+
+        for (int a : ia) {
+            System.out.print(a+" ");
+        }
+        System.out.format ("\n");
+        // search ia for 274, returns the index
+        System.out.println ("Index of 274 is" + binarySearch(ia, 274));
+    }
+
+    public static int binarySearch(int[] arr, int key) {
+        int low = 0, high = arr.length - 1;
+        int mid = 0;
+        while (low < high) {
+            mid = (low + high)/2;
+            if (key == arr[mid]) {
+                return mid;
+            } else if (key > arr[mid]) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
             }
         }
-        for (String s : sa) {
-            System.out.println(s);
-        }
-
+        return -mid; 
     }
 }

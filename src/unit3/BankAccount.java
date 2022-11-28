@@ -1,4 +1,4 @@
-package unit2;
+package unit3;
 
 public class BankAccount {
     static int numAccounts = 0;
@@ -31,7 +31,20 @@ public class BankAccount {
         return balance;
     }
 
+    public double withdraw (double money) {
+        if (money < balance) {
+            balance -= money;
+            return balance;
+        } else {
+            return -1;
+        }
+    }
+
+    public double getBalance () {
+        return balance;
+    }
+
     public String toString() {
-        return String.format("%s has an account with $%.2f", nameOwner, balance);
+        return String.format("Account #%5d is owned by %s with $%.2f", id, nameOwner, balance);
     }
 }
