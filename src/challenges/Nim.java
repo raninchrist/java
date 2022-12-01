@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 public class Nim {
     final int MAX = 16;
-    int[] piles, counts = new int[(int)(Math.log(MAX)/Math.log(2))];
+    int piles[], counts[], pileChosen;
 
     public Nim (int n) {
         piles = new int[n];
         for (int i = 0; i < n; i++) {
             piles[i] = (int) (Math.random() * (MAX-1) + 1);            
         }
+        counts = new int[(int)(Math.log(MAX)/Math.log(2))];
     }
     public String toString() {
         String str = "";
@@ -18,14 +19,20 @@ public class Nim {
             str += (i + 1) + ") " + piles[i] + "\t";
         return str + "\n";
     }
+    // count the number of 1's in each digit
     private void analyze () {
-        int p2 = 1;
+        pileChosen = -1;
+        int p2 = 1, pile = 0;
         for (int i = 0; i < counts.length; i++) {
-            for (int j : piles) {
-                if ((j & p2) == p2) counts[i] ++;
+            for (int j = 0; j < piles.length; j ++) {
+                if ((piles[j] & p2) == p2) {
+                    counts[i] ++;
+                    pile = j;
+                }
             }
             p2 <<=1;
-            //System.out.println (counts[i]);
+            counts[i] %= 2;
+            if (counts[i] > 0) pileChosen = pile;
         }
 
     }
@@ -37,20 +44,22 @@ public class Nim {
 
     public boolean smartTake() {
         analyze();
-        boolean toWin = false;
-        for (int c : counts) {
-            if (c % 2 > 0) {
-                toWin = true;
-                break;
-            }
-        }
-        if (!toWin) {
-            int p = 0;
-            while (piles[p] == 0) p++;
-            return take (p + 1, 1);
+        int toTake;
+        if (pileChosen < 0) {
+            pileChosen = 0;
+            while (piles[pileChosen] == 0) pileChosen++;
+            toTake = (int) (Math.random() * piles[pileChosen] + 1);
         } else {
-            return true;
+            int wanted = 0, p2 = 1;
+            for (int i = 0; i < counts.length; i ++) {
+                if (counts[i] == 0) wanted += piles[pileChosen] & p2;
+                else if ((piles[pileChosen] & p2) == 0) wanted += p2;
+                p2 <<= 1; 
+            }
+            toTake = piles[pileChosen] - wanted;
         }
+        System.out.println ("Computer took: "+(pileChosen+1)+ " " + toTake);
+        return take (pileChosen + 1, toTake);
         
     }
 
@@ -64,13 +73,21 @@ public class Nim {
     public static void main (String[] args) {
         Nim me = new Nim (4);
         Scanner kb = new Scanner (System.in);
-        while (!me.isOver()) {
-            System.out.print (me + "You take (pile, stones):");
-            int p = kb.nextInt();
-            int n = kb.nextInt();
-            me.take(p, n);
-            me.smartTake();
+        String winner = "Computer";
+        do {
+            int p, n;
+            do { // user's turn
+                System.out.print (me + "You take (pile, stones):");
+                p = kb.nextInt();
+                n = kb.nextInt();
+            } while (!me.take(p, n));
+            // computer's turn
+            if (me.isOver()) winner = "You";
+            else me.smartTake();
             
-        }
+        } while (!me.isOver());
+        
+        System.out.println (winner + " won!");
+        kb.close();
     }
 }
