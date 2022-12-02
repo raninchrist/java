@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Nim {
     final int MAX = 16;
-    int piles[], counts[], pileChosen;
+    int piles[], counts[];
 
     public Nim (int n) {
         piles = new int[n];
@@ -19,11 +19,12 @@ public class Nim {
             str += (i + 1) + ") " + piles[i] + "\t";
         return str + "\n";
     }
-    // count the number of 1's in each digit
-    private void analyze () {
-        pileChosen = -1;
+    // count the even/odd of 1's in each digit, returns the pile to pick
+    private int analyze () {
+        int pileChosen = -1;
         int p2 = 1, pile = 0;
         for (int i = 0; i < counts.length; i++) {
+            counts[i] = 0;
             for (int j = 0; j < piles.length; j ++) {
                 if ((piles[j] & p2) == p2) {
                     counts[i] ++;
@@ -34,6 +35,7 @@ public class Nim {
             counts[i] %= 2;
             if (counts[i] > 0) pileChosen = pile;
         }
+        return pileChosen;
 
     }
     public boolean take (int p, int n) {
@@ -43,13 +45,13 @@ public class Nim {
     }
 
     public boolean smartTake() {
-        analyze();
+        int pileChosen = analyze();
         int toTake;
-        if (pileChosen < 0) {
+        if (pileChosen < 0) { // no move to win
             pileChosen = 0;
             while (piles[pileChosen] == 0) pileChosen++;
             toTake = (int) (Math.random() * piles[pileChosen] + 1);
-        } else {
+        } else { // move to win
             int wanted = 0, p2 = 1;
             for (int i = 0; i < counts.length; i ++) {
                 if (counts[i] == 0) wanted += piles[pileChosen] & p2;
@@ -74,6 +76,9 @@ public class Nim {
         Nim me = new Nim (4);
         Scanner kb = new Scanner (System.in);
         String winner = "Computer";
+        System.out.println ("This is the game of Nim. We have some piles of stones (any piles, any stones).");
+        System.out.println ("You can take any number of stones from one pile each turn.");
+        System.out.println ("Winner is the one who takes the last stone. Let's go...");
         do {
             int p, n;
             do { // user's turn
