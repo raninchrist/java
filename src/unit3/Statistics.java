@@ -36,6 +36,11 @@ public class Statistics {
 
     }
     
+    /**
+     * calculate the mean of the data
+     * pre: none
+     * @return the mean
+     */
     public int getMean () {
         int sum = 0;
         for (int i = 0; i < data.length; i++) {
