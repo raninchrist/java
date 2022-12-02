@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 public class Nim {
     final int MAX = 16;
-    int piles[], counts[];
+    int piles[];
+    boolean odds[];
 
     public Nim (int n) {
         piles = new int[n];
         for (int i = 0; i < n; i++) {
             piles[i] = (int) (Math.random() * (MAX-1) + 1);            
         }
-        counts = new int[(int)(Math.log(MAX)/Math.log(2))];
+        odds = new boolean [(int)(Math.log(MAX)/Math.log(2))];
     }
     public String toString() {
         String str = "";
@@ -23,17 +24,16 @@ public class Nim {
     private int analyze () {
         int pileChosen = -1;
         int p2 = 1, pile = 0;
-        for (int i = 0; i < counts.length; i++) {
-            counts[i] = 0;
+        for (int i = 0; i < odds.length; i++) {
+            odds[i] = false;
             for (int j = 0; j < piles.length; j ++) {
                 if ((piles[j] & p2) == p2) {
-                    counts[i] ++;
+                    odds[i] = !odds[i];
                     pile = j;
                 }
             }
             p2 <<=1;
-            counts[i] %= 2;
-            if (counts[i] > 0) pileChosen = pile;
+            if (odds[i]) pileChosen = pile;
         }
         return pileChosen;
 
@@ -53,8 +53,8 @@ public class Nim {
             toTake = (int) (Math.random() * piles[pileChosen] + 1);
         } else { // move to win
             int wanted = 0, p2 = 1;
-            for (int i = 0; i < counts.length; i ++) {
-                if (counts[i] == 0) wanted += piles[pileChosen] & p2;
+            for (int i = 0; i < odds.length; i ++) {
+                if (!odds[i]) wanted += piles[pileChosen] & p2;
                 else if ((piles[pileChosen] & p2) == 0) wanted += p2;
                 p2 <<= 1; 
             }
@@ -82,7 +82,7 @@ public class Nim {
         do {
             int p, n;
             do { // user's turn
-                System.out.print (me + "You take (pile, stones):");
+                System.out.print (me + "You take (pile stones): ");
                 p = kb.nextInt();
                 n = kb.nextInt();
             } while (!me.take(p, n));
