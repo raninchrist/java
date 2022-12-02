@@ -16,26 +16,15 @@ public class Statistics {
         
     }
     
-    private int getMaxHeight () {
+    public int getMax () {
         int max = 0;
         for (int i = 0; i < counter.length; i++) {
             if (counter[i] > max) max = counter[i];
         }
         return max;
     }
-
-    public int getMode() {
-        int max = 0, modeIndex = 0;
-        for (int i = 0; i < counter.length; i++) {
-            if (counter[i] > max) {
-                max = counter[i];
-                modeIndex = i;
-            }
-        }
-        return modeIndex * 50;
-
-    }
     
+<<<<<<< HEAD
     /**
      * calculate the mean of the data
      * pre: none
@@ -49,12 +38,14 @@ public class Statistics {
         return sum/data.length;
     }
  
+=======
+>>>>>>> 6ea48d58d23206d4ac19a928cffb2826fefba582
     public int[] distribution() {
         return counter;
     }
     
     public void printDistribution() {
-        int max = getMaxHeight();
+        int max = getMax();
         System.out.println("Max = " + max);
         for (int level = max; level > 0; level--) {
             for (int i = 0; i < counter.length; i++) {
@@ -65,10 +56,4 @@ public class Statistics {
         }
     }
 
-    public static void main (String[] args) {
-        Statistics myStat = new Statistics(1000);
-        myStat.printDistribution();
-        System.out.println("The mean is " + myStat.getMean());
-        System.out.println("The mode is " + myStat.getMode());
-    }
 }
