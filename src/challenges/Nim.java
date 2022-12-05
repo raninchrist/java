@@ -38,12 +38,14 @@ public class Nim {
         return pileChosen;
 
     }
+    // take stones from a pile
     public boolean take (int p, int n) {
         if (p < 1 || p > piles.length || n < 1 || n > piles[p - 1]) return false;
         piles[p - 1] -= n;
         return true;
     }
 
+    // Computer's smart move
     public boolean smartTake() {
         int pileChosen = analyze();
         int toTake;
