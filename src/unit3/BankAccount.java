@@ -47,4 +47,12 @@ public class BankAccount {
     public String toString() {
         return String.format("Account #%5d is owned by %s with $%.2f", id, nameOwner, balance);
     }
+
+    public int getID() {
+        return id;
+    }
+
+    public String getName() {
+        return nameOwner;
+    }
 }
