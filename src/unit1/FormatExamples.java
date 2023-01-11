@@ -16,6 +16,11 @@ public class FormatExamples {
         int time[] = {814, 1106, 1452, 35, 1406};
 
         double total = 0;
+        for (double m : money) total += m;
+        for (int i = 0; i <num.length; i++) {
+            System.out.format("%05d\t$%,13.2f\t%10.1f%%\t%02d:%02d\n", num[i], money[i], money[i]/total*100, time[i]/100, time[i]%100);
+        }
+        
 
     }
 }
